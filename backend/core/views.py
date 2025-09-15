@@ -32,9 +32,32 @@ from django.conf import settings
 @permission_classes([AllowAny])
 def health_check(request):
     """Simple health check endpoint"""
+    from django.db import connection
+    from django.conf import settings
+    
+    # Test database connection
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT 1")
+            db_status = "connected"
+    except Exception as e:
+        db_status = f"error: {str(e)}"
+    
+    # Test Redis connection
+    try:
+        import redis
+        r = redis.from_url(settings.REDIS_URL)
+        r.ping()
+        redis_status = "connected"
+    except Exception as e:
+        redis_status = f"error: {str(e)}"
+    
     return Response({
         'status': 'healthy',
-        'message': 'Backend is running properly'
+        'message': 'Backend is running properly',
+        'database': db_status,
+        'redis': redis_status,
+        'debug_mode': settings.DEBUG
     })
 
 logger = logging.getLogger(__name__)

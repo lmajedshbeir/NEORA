@@ -1,59 +1,99 @@
-import React, { useState } from 'react';
-import apiClient from '../api/client';
+services:
+  # Backend Service
+  - type: web
+    name: neora-backend
+    env: python
+    plan: free
+    buildCommand: |
+      cd backend
+      pip install --upgrade pip
+      pip install -r requirements.txt
+      python manage.py makemigrations --noinput
+      python manage.py migrate --noinput
+      python manage.py collectstatic --noinput
+    startCommand: |
+      cd backend
+      daphne neora.asgi:application --bind 0.0.0.0 --port $PORT
+    envVars:
+      - key: DJANGO_SECRET_KEY
+        value: "your-secret-key-here"
+      - key: DJANGO_DEBUG
+        value: "False"
+      - key: DJANGO_ALLOWED_HOSTS
+        value: "*.onrender.com"
+      - key: CORS_ALLOWED_ORIGINS
+        value: "https://neora-frontend-hh8f.onrender.com"
+      - key: CSRF_TRUSTED_ORIGINS
+        value: "https://neora-frontend-hh8f.onrender.com"
+      - key: FRONTEND_BASE_URL
+        value: "https://neora-frontend-hh8f.onrender.com"
+      - key: BACKEND_BASE_URL
+        value: "https://neora-backend-zl4q.onrender.com"
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: neora-redis
+          property: connectionString
+      - key: DATABASE_URL
+        fromDatabase:
+          name: neora-db
+          property: connectionString
+      - key: EMAIL_BACKEND
+        value: "django.core.mail.backends.smtp.EmailBackend"
+      - key: EMAIL_HOST
+        value: "smtp.gmail.com"
+      - key: EMAIL_HOST_USER
+        value: "your-email@gmail.com"
+      - key: EMAIL_HOST_PASSWORD
+        value: "your-app-password"
+      - key: EMAIL_PORT
+        value: "587"
+      - key: EMAIL_USE_TLS
+        value: "true"
+      - key: DEFAULT_FROM_EMAIL
+        value: "noreply@neora.com"
+      - key: N8N_WEBHOOK_URL
+        value: "https://your-n8n-instance.com/webhook/neora-chat"
+      - key: N8N_BASIC_AUTH
+        value: "your-username:your-password"
+      - key: N8N_API_KEY_HEADER
+        value: "X-API-Key"
+      - key: N8N_API_KEY_VALUE
+        value: "your-api-key"
+      - key: ENABLE_TRANSCRIPTION
+        value: "false"
+      - key: LANGUAGE_CODE
+        value: "en"
+      - key: TIMEZONE
+        value: "Asia/Riyadh"
 
-const ConnectionTest = () => {
-  const [result, setResult] = useState(null);
-  const [loading, setLoading] = useState(false);
+  # Frontend Service
+  - type: web
+    name: neora-frontend
+    env: static
+    buildCommand: |
+      cd frontend/neora-frontend
+      npm install -g pnpm
+      pnpm install --no-frozen-lockfile
+      pnpm run build
+    staticPublishPath: ./frontend/neora-frontend/dist
+    envVars:
+      - key: NODE_VERSION
+        value: "18"
+      - key: VITE_API_BASE_URL
+        value: "https://neora-backend-zl4q.onrender.com/api"
+      - key: VITE_WS_BASE_URL
+        value: "wss://neora-backend-zl4q.onrender.com/ws"
+      - key: VITE_BACKEND_URL
+        value: "https://neora-backend-zl4q.onrender.com"
 
-  const testConnection = async () => {
-    setLoading(true);
-    setResult(null);
-    
-    try {
-      const response = await apiClient.get('/connection-test');
-      setResult({
-        success: true,
-        data: response.data
-      });
-    } catch (error) {
-      setResult({
-        success: false,
-        error: error.response?.data || error.message
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
+  # Redis Service
+  - type: redis
+    name: neora-redis
+    plan: free
+    ipAllowList: []
 
-  return (
-    <div className="p-4 border rounded-lg">
-      <h3 className="text-lg font-semibold mb-4">Connection Test</h3>
-      
-      <button
-        onClick={testConnection}
-        disabled={loading}
-        className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:opacity-50"
-      >
-        {loading ? 'Testing...' : 'Test Backend Connection'}
-      </button>
-
-      {result && (
-        <div className="mt-4 p-3 rounded">
-          {result.success ? (
-            <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded">
-              <h4 className="font-semibold">✅ Connection Successful!</h4>
-              <pre className="mt-2 text-sm">{JSON.stringify(result.data, null, 2)}</pre>
-            </div>
-          ) : (
-            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
-              <h4 className="font-semibold">❌ Connection Failed!</h4>
-              <pre className="mt-2 text-sm">{JSON.stringify(result.error, null, 2)}</pre>
-            </div>
-          )}
-        </div>
-      )}
-    </div>
-  );
-};
-
-export default ConnectionTest;
+databases:
+  # PostgreSQL Database
+  - name: neora-db
+    plan: free

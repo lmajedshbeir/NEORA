@@ -36,8 +36,9 @@ services:
           property: connectionString
 
   # Frontend Service
-  - type: static
+  - type: web
     name: neora-frontend
+    env: static
     buildCommand: |
       cd frontend/neora-frontend
       npm install

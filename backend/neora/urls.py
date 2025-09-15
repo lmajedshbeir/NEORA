@@ -22,9 +22,25 @@ from django.http import JsonResponse
 
 def root_view(request):
     """Root endpoint for the API"""
+    from django.db import connection
+    from django.conf import settings
+    
+    # Test database connection
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT 1")
+            db_status = "connected"
+    except Exception as e:
+        db_status = f"error: {str(e)}"
+    
     return JsonResponse({
         'message': 'NEORA AI Executive Assistant API',
         'version': '1.0.0',
+        'debug': {
+            'database': db_status,
+            'debug_mode': settings.DEBUG,
+            'allowed_hosts': settings.ALLOWED_HOSTS,
+        },
         'endpoints': {
             'health': '/api/health',
             'admin': '/admin/',

@@ -6,6 +6,7 @@ services:
     plan: free
     buildCommand: |
       cd backend
+      pip install --upgrade pip
       pip install -r requirements.txt
       python manage.py migrate
       python manage.py collectstatic --noinput
@@ -41,10 +42,13 @@ services:
     env: static
     buildCommand: |
       cd frontend/neora-frontend
-      npm install
-      npm run build
+      npm install -g pnpm
+      pnpm install
+      pnpm run build
     staticPublishPath: ./frontend/neora-frontend/dist
     envVars:
+      - key: NODE_VERSION
+        value: "18"
       - key: VITE_API_BASE_URL
         value: "https://neora-backend.onrender.com/api"
       - key: VITE_WS_BASE_URL

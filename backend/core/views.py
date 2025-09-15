@@ -70,6 +70,19 @@ def health_check(request):
     })
 
 
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def connection_test(request):
+    """Test frontend-backend connection"""
+    return Response({
+        'status': 'success',
+        'message': 'Frontend successfully connected to backend!',
+        'timestamp': request.timestamp if hasattr(request, 'timestamp') else 'unknown',
+        'user_agent': request.META.get('HTTP_USER_AGENT', 'unknown'),
+        'origin': request.META.get('HTTP_ORIGIN', 'unknown')
+    })
+
+
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def test_register(request):

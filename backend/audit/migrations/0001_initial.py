@@ -9,6 +9,7 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
+        ('core', '0001_initial'),
     ]
 
     operations = [
@@ -16,6 +17,7 @@ class Migration(migrations.Migration):
             name='AuditEvent',
             fields=[
                 ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
+                ('user', models.ForeignKey(blank=True, null=True, on_delete=models.SET_NULL, to='core.user')),
                 ('event_type', models.CharField(max_length=100)),
                 ('ip', models.GenericIPAddressField(blank=True, null=True)),
                 ('user_agent', models.TextField(blank=True, null=True)),

@@ -3,7 +3,7 @@ services:
   - type: web
     name: neora-backend
     env: python
-    plan: starter
+    plan: free
     buildCommand: |
       cd backend
       pip install -r requirements.txt
@@ -55,10 +55,10 @@ services:
   # Redis Service
   - type: redis
     name: neora-redis
-    plan: starter
+    plan: free
     ipAllowList: []
 
 databases:
   # PostgreSQL Database
   - name: neora-db
-    plan: starter
+    plan: free

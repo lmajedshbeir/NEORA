@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Get API base URL from environment variables
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://neora-backend.onrender.com/api';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://neora-backend-zl4q.onrender.com/api';
 
 // Log environment variable status
 if (!import.meta.env.VITE_API_BASE_URL) {
@@ -11,6 +11,7 @@ if (!import.meta.env.VITE_API_BASE_URL) {
 // Debug logging
 console.log('API_BASE_URL:', API_BASE_URL);
 console.log('VITE_API_BASE_URL env var:', import.meta.env.VITE_API_BASE_URL);
+console.log('VITE_BACKEND_URL env var:', import.meta.env.VITE_BACKEND_URL);
 console.log('All env vars:', import.meta.env);
 
 // Create axios instance

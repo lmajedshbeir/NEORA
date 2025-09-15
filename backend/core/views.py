@@ -22,6 +22,16 @@ from .tokens import (
     verify_password_reset_token
 )
 from .emails import send_verification_email, send_password_reset_email
+
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def health_check(request):
+    """Simple health check endpoint"""
+    return Response({
+        'status': 'healthy',
+        'message': 'Backend is running properly'
+    })
 from audit.middleware import AuditMiddleware
 from django.conf import settings
 

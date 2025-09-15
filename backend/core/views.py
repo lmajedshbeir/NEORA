@@ -52,13 +52,48 @@ def health_check(request):
     except Exception as e:
         redis_status = f"error: {str(e)}"
     
+    # Test User model
+    try:
+        from .models import User
+        user_count = User.objects.count()
+        user_status = f"connected - {user_count} users"
+    except Exception as e:
+        user_status = f"error: {str(e)}"
+    
     return Response({
         'status': 'healthy',
         'message': 'Backend is running properly',
         'database': db_status,
         'redis': redis_status,
+        'user_model': user_status,
         'debug_mode': settings.DEBUG
     })
+
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def test_register(request):
+    """Test registration endpoint for debugging"""
+    try:
+        serializer = UserRegistrationSerializer(data=request.data)
+        
+        if serializer.is_valid():
+            return Response({
+                'status': 'success',
+                'message': 'Registration data is valid',
+                'data': serializer.validated_data
+            })
+        else:
+            return Response({
+                'status': 'error',
+                'message': 'Registration data is invalid',
+                'errors': serializer.errors
+            }, status=400)
+    except Exception as e:
+        return Response({
+            'status': 'error',
+            'message': f'Registration test failed: {str(e)}'
+        }, status=500)
 
 logger = logging.getLogger(__name__)
 User = get_user_model()

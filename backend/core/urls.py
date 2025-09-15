@@ -16,3 +16,11 @@ urlpatterns = [
     path('me', views.profile, name='profile'),
 ]
 
+
+from django.urls import path, include
+from core.views import csrf
+
+urlpatterns = [
+    path("api/csrf/", csrf),
+    path("api/", include("...")),  # your existing api routes
+]

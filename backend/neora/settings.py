@@ -80,10 +80,15 @@ ASGI_APPLICATION = 'neora.asgi.application'
 # Uses PostgreSQL when DATABASE_URL is set; falls back to SQLite otherwise
 import dj_database_url
 
+# Debug database configuration
+print(f"DATABASE_URL: {os.getenv('DATABASE_URL', 'Not set')}")
+print(f"POSTGRES_HOST: {os.getenv('POSTGRES_HOST', 'Not set')}")
+
 if os.getenv('DATABASE_URL'):
     DATABASES = {
         'default': dj_database_url.parse(os.getenv('DATABASE_URL'))
     }
+    print("Using DATABASE_URL configuration")
 elif os.getenv('POSTGRES_HOST'):
     DATABASES = {
         'default': {
@@ -95,6 +100,7 @@ elif os.getenv('POSTGRES_HOST'):
             'PORT': int(os.getenv('POSTGRES_PORT', '5432')),
         }
     }
+    print("Using POSTGRES_HOST configuration")
 else:
     # Default to SQLite for local development when Postgres is not configured
     DATABASES = {
@@ -103,6 +109,9 @@ else:
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
+    print("Using SQLite configuration")
+
+print(f"Database configuration: {DATABASES}")
 
 # Redis configuration
 REDIS_URL = os.getenv('REDIS_URL', 'redis://localhost:6379/0')

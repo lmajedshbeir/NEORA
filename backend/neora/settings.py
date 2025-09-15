@@ -51,8 +51,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'axes.middleware.AxesMiddleware',
-    'csp.middleware.CSPMiddleware',
-    'audit.middleware.AuditMiddleware',
+    # 'csp.middleware.CSPMiddleware',  # Temporarily disabled for debugging
+    # 'audit.middleware.AuditMiddleware',  # Temporarily disabled for debugging
 ]
 
 ROOT_URLCONF = 'neora.urls'

@@ -18,8 +18,22 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.http import JsonResponse
+
+def root_view(request):
+    """Root endpoint for the API"""
+    return JsonResponse({
+        'message': 'NEORA AI Executive Assistant API',
+        'version': '1.0.0',
+        'endpoints': {
+            'health': '/api/health',
+            'admin': '/admin/',
+            'api': '/api/'
+        }
+    })
 
 urlpatterns = [
+    path('', root_view, name='root'),
     path('admin/', admin.site.urls),
     path('api/', include('core.urls')),
     path('api/', include('chat.urls')),

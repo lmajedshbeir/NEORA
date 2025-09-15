@@ -43,7 +43,7 @@ services:
     buildCommand: |
       cd frontend/neora-frontend
       npm install -g pnpm
-      pnpm install
+      pnpm install --no-frozen-lockfile
       pnpm run build
     staticPublishPath: ./frontend/neora-frontend/dist
     envVars:

@@ -24,6 +24,10 @@ from .tokens import (
 from .emails import send_verification_email, send_password_reset_email
 
 
+from audit.middleware import AuditMiddleware
+from django.conf import settings
+
+
 @api_view(['GET'])
 @permission_classes([AllowAny])
 def health_check(request):
@@ -32,8 +36,6 @@ def health_check(request):
         'status': 'healthy',
         'message': 'Backend is running properly'
     })
-from audit.middleware import AuditMiddleware
-from django.conf import settings
 
 logger = logging.getLogger(__name__)
 User = get_user_model()

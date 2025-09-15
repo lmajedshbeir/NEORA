@@ -18,8 +18,8 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'django-insecure-change-me-in-produc
 DEBUG = os.getenv('DJANGO_DEBUG', 'True').lower() == 'true'
 
 # Frontend/Backend URLs (used for CORS/CSRF and links)
-FRONTEND_BASE_URL = os.getenv('FRONTEND_BASE_URL', 'http://localhost:5175')
-BACKEND_BASE_URL = os.getenv('BACKEND_BASE_URL', 'http://localhost:8001')
+FRONTEND_BASE_URL = os.getenv('FRONTEND_BASE_URL', 'https://neora-frontend-hh8f.onrender.com')
+BACKEND_BASE_URL = os.getenv('BACKEND_BASE_URL',  'https://neora-backend-zl4q.onrender.com')
 
 # Render gives this automatically; we’ll use it to auto-allow the exact host
 RENDER_EXTERNAL_URL = os.getenv("RENDER_EXTERNAL_URL", "")

@@ -1,0 +1,93 @@
+{
+  "app": {
+    "name": "نيورا",
+    "tagline": "مساعد تنفيذي ذكي"
+  },
+  "nav": {
+    "chat": "المحادثة",
+    "settings": "الإعدادات",
+    "logout": "تسجيل الخروج",
+    "login": "تسجيل الدخول",
+    "register": "إنشاء حساب"
+  },
+  "auth": {
+    "login": {
+      "title": "مرحباً بعودتك",
+      "subtitle": "سجل دخولك إلى حساب نيورا",
+      "email": "عنوان البريد الإلكتروني",
+      "password": "كلمة المرور",
+      "submit": "تسجيل الدخول",
+      "forgot": "نسيت كلمة المرور؟",
+      "noAccount": "ليس لديك حساب؟",
+      "signUp": "إنشاء حساب"
+    },
+    "register": {
+      "title": "إنشاء حساب",
+      "subtitle": "انضم إلى نيورا اليوم",
+      "firstName": "الاسم الأول",
+      "lastName": "اسم العائلة",
+      "email": "عنوان البريد الإلكتروني",
+      "password": "كلمة المرور",
+      "confirmPassword": "تأكيد كلمة المرور",
+      "submit": "إنشاء حساب",
+      "hasAccount": "لديك حساب بالفعل؟",
+      "signIn": "تسجيل الدخول"
+    }
+  },
+  "chat": {
+    "title": "المحادثة مع نيورا",
+    "placeholder": "اكتب رسالتك هنا...",
+    "send": "إرسال",
+    "voice": "صوت",
+    "listening": "أستمع...",
+    "recording": "جاري التسجيل...",
+    "processing": "جاري المعالجة...",
+    "error": "حدث خطأ. يرجى المحاولة مرة أخرى.",
+    "empty": "ابدأ محادثة مع نيورا",
+    "welcome": "مرحباً! أنا نيورا، مساعدك التنفيذي الذكي. كيف يمكنني مساعدتك اليوم؟",
+    "clearChat": "مسح المحادثة",
+    "clearing": "جاري المسح...",
+    "connected": "متصل",
+    "connecting": "جاري الاتصال...",
+    "actions": "الإجراءات"
+  },
+  "settings": {
+    "title": "الإعدادات",
+    "profile": "الملف الشخصي",
+    "language": "اللغة",
+    "save": "حفظ التغييرات"
+  },
+  "language": {
+    "en": "English",
+    "ar": "العربية"
+  },
+  "theme": {
+    "light": "فاتح",
+    "dark": "داكن",
+    "toggle": "تبديل"
+  },
+  "actions": {
+    "sendEmail": "إرسال بريد إلكتروني",
+    "createDraft": "إنشاء مسودة",
+    "summarizeEmails": "تلخيص الرسائل",
+    "summarizeToday": "تلخيص رسائل اليوم",
+    "summarizeTodayFrom": "تلخيص رسائل اليوم من {recipient}",
+    "summarizeLastNumber": "تلخيص آخر {number} رسائل",
+    "summarizeLastNumberFrom": "تلخيص آخر {number} رسائل من {recipient}",
+    "summarizeOnDate": "تلخيص الرسائل في {date}",
+    "summarizeOnDateFrom": "تلخيص الرسائل في {date} من {sender}",
+    "createCalendarEvent": "إنشاء حدث في التقويم",
+    "createContact": "إنشاء جهة اتصال",
+    "internetResearch": "البحث على الإنترنت",
+    "createPDF": "إنشاء PDF",
+    "sendSlackMessage": "إرسال رسالة سلاك"
+  },
+  "common": {
+    "loading": "جاري التحميل...",
+    "error": "خطأ",
+    "success": "نجح",
+    "cancel": "إلغاء",
+    "save": "حفظ"
+  }
+}
+

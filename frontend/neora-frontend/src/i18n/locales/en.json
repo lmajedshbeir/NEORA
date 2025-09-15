@@ -1,0 +1,93 @@
+{
+  "app": {
+    "name": "NEORA",
+    "tagline": "AI Executive Assistant"
+  },
+  "nav": {
+    "chat": "Chat",
+    "settings": "Settings",
+    "logout": "Logout",
+    "login": "Login",
+    "register": "Register"
+  },
+  "auth": {
+    "login": {
+      "title": "Welcome Back",
+      "subtitle": "Sign in to your NEORA account",
+      "email": "Email Address",
+      "password": "Password",
+      "submit": "Sign In",
+      "forgot": "Forgot Password?",
+      "noAccount": "Don't have an account?",
+      "signUp": "Sign up"
+    },
+    "register": {
+      "title": "Create Account",
+      "subtitle": "Join NEORA today",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email Address",
+      "password": "Password",
+      "confirmPassword": "Confirm Password",
+      "submit": "Create Account",
+      "hasAccount": "Already have an account?",
+      "signIn": "Sign in"
+    }
+  },
+  "chat": {
+    "title": "Chat with NEORA",
+    "placeholder": "Type your message here...",
+    "send": "Send",
+    "voice": "Voice",
+    "listening": "Listening...",
+    "recording": "Recording...",
+    "processing": "Processing...",
+    "error": "Something went wrong. Please try again.",
+    "empty": "Start a conversation with NEORA",
+    "welcome": "Hello! I'm NEORA, your AI executive assistant. How can I help you today?",
+    "clearChat": "Clear Chat",
+    "clearing": "Clearing...",
+    "connected": "Connected",
+    "connecting": "Connecting...",
+    "actions": "Actions"
+  },
+  "settings": {
+    "title": "Settings",
+    "profile": "Profile",
+    "language": "Language",
+    "save": "Save Changes"
+  },
+  "language": {
+    "en": "English",
+    "ar": "Arabic"
+  },
+  "theme": {
+    "light": "Light",
+    "dark": "Dark",
+    "toggle": "Toggle"
+  },
+  "actions": {
+    "sendEmail": "Send Email",
+    "createDraft": "Create a Draft",
+    "summarizeEmails": "Summarize Emails",
+    "summarizeToday": "Summarize Today's Emails",
+    "summarizeTodayFrom": "Summarize Today's Emails from {recipient}",
+    "summarizeLastNumber": "Summarize Last {number} Emails",
+    "summarizeLastNumberFrom": "Summarize Last {number} Emails from {recipient}",
+    "summarizeOnDate": "Summarize Emails on {date}",
+    "summarizeOnDateFrom": "Summarize Emails on {date} from {sender}",
+    "createCalendarEvent": "Create Calendar Event",
+    "createContact": "Create Contact",
+    "internetResearch": "Internet Research",
+    "createPDF": "Create PDF",
+    "sendSlackMessage": "Send Slack Message"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "cancel": "Cancel",
+    "save": "Save"
+  }
+}
+

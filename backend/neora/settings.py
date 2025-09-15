@@ -226,6 +226,9 @@ CORS_ALLOW_CREDENTIALS = True
 # In DEBUG, allow all origins to simplify local/LAN testing
 if DEBUG:
     CORS_ALLOW_ALL_ORIGINS = True
+else:
+    # In production, also allow all origins for now to debug the issue
+    CORS_ALLOW_ALL_ORIGINS = True
 
 # CSRF Configuration
 CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS', 'http://localhost:5175').split(',')

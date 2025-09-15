@@ -50,7 +50,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'axes.middleware.AxesMiddleware',
+    # 'axes.middleware.AxesMiddleware',  # Temporarily disabled for debugging
     # 'csp.middleware.CSPMiddleware',  # Temporarily disabled for debugging
     # 'audit.middleware.AuditMiddleware',  # Temporarily disabled for debugging
 ]
@@ -85,10 +85,21 @@ print(f"DATABASE_URL: {os.getenv('DATABASE_URL', 'Not set')}")
 print(f"POSTGRES_HOST: {os.getenv('POSTGRES_HOST', 'Not set')}")
 
 if os.getenv('DATABASE_URL'):
-    DATABASES = {
-        'default': dj_database_url.parse(os.getenv('DATABASE_URL'))
-    }
-    print("Using DATABASE_URL configuration")
+    try:
+        DATABASES = {
+            'default': dj_database_url.parse(os.getenv('DATABASE_URL'))
+        }
+        print("Using DATABASE_URL configuration")
+    except Exception as e:
+        print(f"Error parsing DATABASE_URL: {e}")
+        # Fallback to SQLite if DATABASE_URL is invalid
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.sqlite3',
+                'NAME': BASE_DIR / 'db.sqlite3',
+            }
+        }
+        print("Falling back to SQLite due to DATABASE_URL error")
 elif os.getenv('POSTGRES_HOST'):
     DATABASES = {
         'default': {

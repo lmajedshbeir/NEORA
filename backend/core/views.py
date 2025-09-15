@@ -7,6 +7,14 @@ from django.contrib.auth import get_user_model
 from django.db import transaction
 import logging
 
+
+from django.views.decorators.csrf import ensure_csrf_cookie
+from django.http import JsonResponse
+
+@ensure_csrf_cookie
+def csrf(request):
+    return JsonResponse({"detail": "ok"})
+
 from .serializers import (
     UserRegistrationSerializer,
     UserLoginSerializer,
